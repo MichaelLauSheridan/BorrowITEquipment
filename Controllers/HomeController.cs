@@ -17,7 +17,12 @@ public class HomeController : Controller
     {
         return View();
     }
-
+    [HttpGet]
+    public ViewResult EquipmentForm()
+    {
+        return View(new EquipmentRequest());
+    }
+    [HttpPost]
     public IActionResult Privacy()
     {
         return View();
