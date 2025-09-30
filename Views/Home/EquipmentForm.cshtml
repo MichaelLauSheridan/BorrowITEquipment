@@ -1,5 +1,39 @@
+@model BorrowITEquip.Models.EquipmentRequest
 <div class="text-center">
-
     <h1 class="display-4">Equipment Form</h1>
     <div>This is the Equipment Form</div>
 </div>
+<form asp-action="EquipmentRequest" method="post">
+        <div>
+            <label asp-for="Name">Your name:</label>
+            <input asp-for="Name" />
+        </div>
+        <div>
+            <label asp-for="Email">Your email:</label>
+            <input asp-for="Email" />
+        </div>
+        <div>
+            <label asp-for="Phone">Your phone:</label>
+            <input asp-for="Phone" />
+        </div>
+        <div>
+            <label asp-for="Role">Your Role:</label>
+            <select asp-for="Role" asp-items="Html.GetEnumSelectList<BorrowITEquip.Models.Role>()" class="form-control">
+                <option value="">Choose a role</option>
+            </select>
+        </div>
+        <div>
+            <label asp-for="EquipmentType">Equipment Type:</label>
+            <select asp-for="EquipmentType" asp-items="Html.GetEnumSelectList<BorrowITEquip.Models.EquipmentType>()" class="form-control">
+                <option value="">Choose an equipment</option>
+            </select>
+        </div>
+        <div>
+            <label asp-for="RequestDetails">Request Details</label>
+            <input asp-for="RequestDetails"/>
+        </div>
+        <div>
+            <label asp-for="Duration">Duration (Days)</label>
+            <input asp-for="Duration"/>
+        </div>
+</form>
