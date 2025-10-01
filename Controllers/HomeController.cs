@@ -2,6 +2,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using BorrowITEquip.Models;
 using BorrowITEquip.Models.Repositories;
+using System.Linq;
 
 namespace BorrowITEquip.Controllers;
 
@@ -17,6 +18,12 @@ public class HomeController : Controller
     public IActionResult Index()
     {
         return View();
+    }
+    [HttpGet("/Requests")]
+    public IActionResult Requests()
+    {
+    var items = Repository.Requests.OrderByDescending(r => r.Id).ToList();
+    return View(items);
     }
     [HttpGet("/AllEquipment")]
     public IActionResult AllEquipment()

@@ -1,0 +1,40 @@
+@model IEnumerable<BorrowITEquip.Models.EquipmentRequest>
+
+<div class="container py-4">
+    <h1 class="display-6 mb-3">Requests</h1>
+    <p class="text-muted">All equipment requests submitted by users.</p>
+
+    <table class="table table-hover align-middle">
+        <thead class="table-light">
+            <tr>
+                <th>Equipment</th>
+                <th>Name</th>
+                <th>Role</th>
+                <th class="text-end">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        @if (!Model.Any())
+        {
+            <tr>
+                <td colspan="4" class="text-center text-muted py-4">No requests yet.</td>
+            </tr>
+        }
+        else
+        {
+            @foreach (var r in Model)
+            {
+                <tr>
+                    <td>@r.EquipmentType</td>
+                    <td>@r.Name</td>
+                    <td>@r.Role</td>
+                    <td class="text-end">
+                        <button type="button" class="btn btn-success btn-sm me-2">Accept</button>
+                        <button type="button" class="btn btn-outline-danger btn-sm">Deny</button>
+                    </td>
+                </tr>
+            }
+        }
+        </tbody>
+    </table>
+</div>
