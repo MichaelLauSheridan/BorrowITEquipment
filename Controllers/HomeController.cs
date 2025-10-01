@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using BorrowITEquip.Models;
+using BorrowITEquip.Models.Repositories;
 
 namespace BorrowITEquip.Controllers;
 
@@ -17,15 +18,40 @@ public class HomeController : Controller
     {
         return View();
     }
-    [HttpGet]
-    public ViewResult EquipmentForm()
+    [HttpGet("/AllEquipment")]
+    public IActionResult AllEquipment()
+    {
+        var items = BorrowITEquip.Models.Repositories.EquipmentRepository.GetAll();
+        return View(items);
+    }
+    [HttpGet("/AvailableEquipment")]
+    public IActionResult AvailableEquipment()
+    {
+        var items = EquipmentRepository.GetAll().Where(e => e.IsAvailable);
+        return View(items);
+    }
+    [HttpGet("/EquipmentRequest")]
+    public IActionResult EquipmentForm()
     {
         return View(new EquipmentRequest());
     }
-    [HttpPost]
-    public IActionResult Privacy()
+    [HttpPost("/EquipmentRequest")]
+    public IActionResult EquipmentForm(EquipmentRequest model)
     {
-        return View();
+        if (!ModelState.IsValid)
+        {
+            return View(model);
+        }
+
+        Repository.AddRequest(model);
+
+        return RedirectToAction(nameof(Confirmation), new { id = model.Id });
+    }
+    public IActionResult Confirmation(int id)
+    {
+        var req = Repository.Requests.FirstOrDefault(r => r.Id == id);
+        if (req is null) return RedirectToAction(nameof(EquipmentForm));
+        return View(req);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

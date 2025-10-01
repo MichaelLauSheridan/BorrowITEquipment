@@ -1,0 +1,38 @@
+@model IEnumerable<BorrowITEquip.Models.Equipment>
+
+<div class="container py-4">
+    <h1 class="display-6 mb-3">All Equipment</h1>
+    <p class="text-muted">This is the full list of IT equipment available in the system.</p>
+
+    <table class="table table-hover align-middle">
+        <thead class="table-light">
+            <tr>
+                <th>Id</th>
+                <th>Type</th>
+                <th>Description</th>
+                <th class="text-center">Availability</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var e in Model)
+        {
+            var rowClass = e.IsAvailable ? "row-available" : "row-unavailable";
+            <tr class="@rowClass">
+                <td>@e.Id</td>
+                <td>@e.Type</td>
+                <td>@e.Description</td>
+                <td class="text-center">
+                    @if (e.IsAvailable)
+                    {
+                        <span class="badge bg-success">Available</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">Unavailable</span>
+                    }
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

@@ -1,39 +1,66 @@
 @model BorrowITEquip.Models.EquipmentRequest
+
 <div class="text-center">
     <h1 class="display-4">Equipment Form</h1>
-    <div>This is the Equipment Form</div>
 </div>
-<form asp-action="EquipmentRequest" method="post">
-        <div>
-            <label asp-for="Name">Your name:</label>
-            <input asp-for="Name" />
-        </div>
-        <div>
-            <label asp-for="Email">Your email:</label>
-            <input asp-for="Email" />
-        </div>
-        <div>
-            <label asp-for="Phone">Your phone:</label>
-            <input asp-for="Phone" />
-        </div>
-        <div>
-            <label asp-for="Role">Your Role:</label>
-            <select asp-for="Role" asp-items="Html.GetEnumSelectList<BorrowITEquip.Models.Role>()" class="form-control">
-                <option value="">Choose a role</option>
-            </select>
-        </div>
-        <div>
-            <label asp-for="EquipmentType">Equipment Type:</label>
-            <select asp-for="EquipmentType" asp-items="Html.GetEnumSelectList<BorrowITEquip.Models.EquipmentType>()" class="form-control">
-                <option value="">Choose an equipment</option>
-            </select>
-        </div>
-        <div>
-            <label asp-for="RequestDetails">Request Details</label>
-            <input asp-for="RequestDetails"/>
-        </div>
-        <div>
-            <label asp-for="Duration">Duration (Days)</label>
-            <input asp-for="Duration"/>
-        </div>
+
+<form action="/EquipmentRequest" method="post" novalidate>
+    <!-- show a summary at the top -->
+    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label">Your name:</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label">Your email:</label>
+        <input asp-for="Email" class="form-control" type="email" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Phone" class="form-label">Your phone:</label>
+        <input asp-for="Phone" class="form-control" type="tel" placeholder="905-922-2222" />
+        <span asp-validation-for="Phone" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Role" class="form-label">Your Role:</label>
+        <select asp-for="Role"
+                asp-items="Html.GetEnumSelectList<BorrowITEquip.Models.Role>()"
+                class="form-control">
+            <option value="">Choose a role</option>
+        </select>
+        <span asp-validation-for="Role" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="EquipmentType" class="form-label">Equipment Type:</label>
+        <select asp-for="EquipmentType"
+                asp-items="Html.GetEnumSelectList<BorrowITEquip.Models.EquipmentType>()"
+                class="form-control">
+            <option value="">Choose an equipment</option>
+        </select>
+        <span asp-validation-for="EquipmentType" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="RequestDetails" class="form-label">Request Details</label>
+        <textarea asp-for="RequestDetails" class="form-control" rows="4"></textarea>
+        <span asp-validation-for="RequestDetails" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Duration" class="form-label">Duration (Days)</label>
+        <input asp-for="Duration" class="form-control" type="number" min="1" step="1" />
+        <span asp-validation-for="Duration" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit Request</button>
 </form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
