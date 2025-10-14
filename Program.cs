@@ -16,7 +16,7 @@ builder.Services.AddScoped<IRequestRepository, EFRequestRepository>();
 
 var app = builder.Build();
 
-// (optional) simple dev-time migration apply
+// simple dev-time migration apply
 using (var scope = app.Services.CreateScope())
 {
     var env = scope.ServiceProvider.GetRequiredService<IWebHostEnvironment>();
@@ -24,8 +24,10 @@ using (var scope = app.Services.CreateScope())
     {
         var db = scope.ServiceProvider.GetRequiredService<FastEquipmentContext>();
         db.Database.Migrate();
+        DbSeeder.Seed(db);
     }
 }
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
