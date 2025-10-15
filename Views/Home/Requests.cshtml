@@ -1,4 +1,5 @@
 @model IEnumerable<BorrowITEquip.Models.ViewModels.RequestRowVm>
+@using BorrowITEquip.Models
 
 <div class="container py-4">
     <h1 class="display-6 mb-3">Requests (Admin)</h1>
@@ -29,7 +30,7 @@
                     <td>@r.Role</td>
                     <td>@r.DurationDays days</td>
                     <td>
-                        <span class="badge @(r.Status == BorrowITEquip.Models.RequestStatus.Pending ? "bg-warning" : r.Status == BorrowITEquip.Models.RequestStatus.Accepted ? "bg-success" : "bg-danger")">
+                        <span class="badge @(r.Status == RequestStatus.Pending ? "bg-warning" : r.Status == RequestStatus.Accepted ? "bg-success" : "bg-danger")">
                             @r.Status
                         </span>
                     </td>

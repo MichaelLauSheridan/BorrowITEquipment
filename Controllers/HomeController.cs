@@ -95,7 +95,7 @@ namespace BorrowITEquip.Controllers
         {
             var rows = _req.GetAll()
                 .Join(_equip.GetAll(), r => r.EquipmentId, e => e.Id,
-                    (r, e) => new BorrowITEquip.Models.ViewModels.RequestRowVm
+                    (r, e) => new RequestRowVm
                     {
                         Id = r.Id,
                         Equipment = $"{e.Description} ({e.Type})",
