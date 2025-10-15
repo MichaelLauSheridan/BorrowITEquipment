@@ -7,10 +7,8 @@ namespace BorrowITEquip.Data
     {
         public static void Seed(FastEquipmentContext context)
         {
-            // Ensure DB is created
             context.Database.EnsureCreated();
 
-            // If there’s already data, skip seeding
             if (context.Equipment.Any()) return;
 
             var items = new[]

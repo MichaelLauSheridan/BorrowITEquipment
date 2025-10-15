@@ -12,7 +12,7 @@ namespace BorrowITEquip.Models.ViewModels
         [Required, EmailAddress]
         public string Email { get; set; } = string.Empty;
 
-        [Required, RegularExpression(@"^\d{3}-\d{3}-\d{4}$")]
+        [Required, RegularExpression(@"^\d{3}-\d{3}-\d{4}$", ErrorMessage = "Use format: 905-123-4567")]
         public string Phone { get; set; } = string.Empty;
 
         [Required]

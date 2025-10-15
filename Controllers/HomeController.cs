@@ -1,4 +1,3 @@
-// Controllers/HomeController.cs
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -42,7 +41,6 @@ namespace BorrowITEquip.Controllers
             return View(items);
         }
 
-        // ---- Request Form (uses RequestFormVm instead of EquipmentRequest) ----
         [HttpGet("/EquipmentRequest")]
         public IActionResult EquipmentForm()
         {

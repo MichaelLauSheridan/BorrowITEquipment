@@ -6,17 +6,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 
-// DbContext
 builder.Services.AddDbContext<FastEquipmentContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("FastEquipmentDb")));
 
-// Repositories
 builder.Services.AddScoped<IEquipmentRepository, EFEquipmentRepository>();
 builder.Services.AddScoped<IRequestRepository, EFRequestRepository>();
 
 var app = builder.Build();
 
-// simple dev-time migration apply
 using (var scope = app.Services.CreateScope())
 {
     var env = scope.ServiceProvider.GetRequiredService<IWebHostEnvironment>();
