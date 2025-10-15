@@ -29,3 +29,12 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+.row-available {
+    border-left: 6px solid #198754;
+    background: rgba(25, 135, 84, 0.05);
+}
+.row-unavailable {
+    border-left: 6px solid #6c757d;
+    background: rgba(108, 117, 125, 0.06);
+}
